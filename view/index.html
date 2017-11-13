@@ -9,14 +9,16 @@
     <h1>Zapisovanim do text area se zapisují data do souboru na disku</h1>
     <textarea rows="4" cols="50">Zapisuj text</textarea>
     <script>
+        // Je nutné importovat knihovny jako v Node.js
         const electron = require('electron');
         const { ipcRenderer } = electron;
 
+        // Přes nativní JS selctory, naslouchám a následně vyberu data z <textarea />
         document.querySelector('textarea').addEventListener('input', (event) => {
-            event.preventDefault();
-            const { value } = document.querySelector('textarea');
+            const { value } = document.querySelector('textarea'); // Využití syntaxe ES6
 
-            ipcRenderer.send("view-data", value);
+            ipcRenderer.send("view-data", value); // Pošle data do hlavního procesu 
+            //(první parametr je pouze nazev udalosti, může byt libovolny)
         });
     </script>
 </body>
